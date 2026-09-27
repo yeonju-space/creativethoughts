@@ -1,0 +1,1038 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>라벨링 협력업체 현황 (Template)</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F3F5F6;
+  --surface:#ffffff;
+  --surface-2:#E9EDEF;
+  --border:#D5DCE0;
+  --ink:#15212B;
+  --ink-2:#4A5A66;
+  --muted:#7A8893;
+  --accent:#0E6F86;
+  --accent-ink:#ffffff;
+  --good:#2C8A5A;
+  --warn:#B7790A;
+  --crit:#BE3F3A;
+
+  --v-nexter:#0891b2;
+  --v-lts:#1f9d7c;
+  --v-crowd:#d1592e;
+  --v-alchera:#8b5cf6;
+  --v-ns:#7a7568;
+
+  --font-sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,-apple-system,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F151A;
+    --surface:#172028;
+    --surface-2:#1E2932;
+    --border:#2C3A45;
+    --ink:#E6EDF1;
+    --ink-2:#A9B7C1;
+    --muted:#7B8A95;
+    --accent:#4FB3CC;
+    --accent-ink:#08161B;
+    --good:#5CC08C;
+    --warn:#E0A83A;
+    --crit:#EE7A74;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F151A;
+  --surface:#172028;
+  --surface-2:#1E2932;
+  --border:#2C3A45;
+  --ink:#E6EDF1;
+  --ink-2:#A9B7C1;
+  --muted:#7B8A95;
+  --accent:#4FB3CC;
+  --accent-ink:#08161B;
+  --good:#5CC08C;
+  --warn:#E0A83A;
+  --crit:#EE7A74;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-sans);
+  padding:0 20px;
+}
+.wrap{max-width:1080px;margin:0 auto;padding-block:40px 64px}
+h1,h2,h3{font-family:var(--font-sans);font-weight:600;text-wrap:balance;margin:0}
+.num{font-variant-numeric:tabular-nums;font-family:var(--font-mono)}
+a{color:var(--accent)}
+
+header.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:6px;}
+.eyebrow{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:6px;font-family:var(--font-mono)}
+h1{font-size:20px;font-weight:600;letter-spacing:-.01em}
+.asof{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;font-family:var(--font-mono)}
+.lede{color:var(--ink-2);max-width:64ch;line-height:1.6;margin-top:14px;font-size:14px}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:24px 0}
+.stat{background:var(--surface);padding:14px 16px}
+.stat .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:500}
+.stat .v{font-size:18px;font-weight:600;margin-top:4px;font-family:var(--font-mono)}
+.stat .u{font-size:12px;color:var(--muted);margin-left:4px;font-weight:400;font-family:var(--font-sans)}
+
+section{margin-top:40px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:10px}
+.sec-head h2{font-size:15px;font-weight:600;letter-spacing:-0.01em;position:relative;padding-left:11px}
+.sec-head h2::before{content:"";position:absolute;left:0;top:2px;bottom:2px;width:3px;border-radius:2px;background:var(--accent)}
+.sec-head .sub{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;font-family:var(--font-mono)}
+
+/* share bar */
+.sharebar{display:flex;width:100%;height:30px;border-radius:6px;overflow:hidden;border:1px solid var(--border)}
+.sharebar div{display:flex;align-items:center;justify-content:center;color:#fff;font-size:11.5px;font-weight:600;font-variant-numeric:tabular-nums;font-family:var(--font-mono);white-space:nowrap;overflow:hidden}
+.legend{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:12px;font-size:12.5px}
+.legend .item{display:flex;align-items:center;gap:7px;color:var(--ink-2)}
+.legend .dot{width:9px;height:9px;border-radius:3px;flex:none}
+.legend b{color:var(--ink);font-weight:600}
+
+/* vendor cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px;position:relative;display:flex;flex-direction:column;gap:9px}
+.card .stripe{position:absolute;top:0;left:0;right:0;height:3px;border-radius:8px 8px 0 0}
+.card h3{font-size:14px;font-weight:600;margin-top:4px}
+.card .role{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums;font-family:var(--font-mono)}
+.card .site{font-size:12px}
+.card .row{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);border-top:1px dashed var(--border);padding-top:8px;margin-top:2px}
+.card .row b{color:var(--ink);font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:10.5px;background:var(--surface-2);color:var(--ink-2);padding:3px 8px;border-radius:999px;font-weight:500}
+.card p.desc{font-size:12.5px;color:var(--ink-2);line-height:1.55;margin:0}
+.card .vol{margin-top:auto;display:flex;justify-content:space-between;align-items:baseline;background:var(--surface-2);border-radius:6px;padding:8px 10px}
+.card .vol .n{font-size:15px;font-weight:600;font-family:var(--font-mono)}
+.card .vol .l{font-size:11px;color:var(--muted)}
+.unresolved{border-style:dashed}
+.unresolved .site{color:var(--warn);font-weight:600}
+
+/* per-feature share stacks */
+.fstack{margin-bottom:16px;padding-bottom:14px;border-bottom:1px dashed var(--border)}
+.fstack:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.fstack .fhead{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;margin-bottom:6px;gap:10px;flex-wrap:wrap}
+.fstack .fhead .fname{font-weight:600;color:var(--ink)}
+.fstack .fhead .ftot{color:var(--muted);font-size:11.5px;font-family:var(--font-mono)}
+.fstack .bar{display:flex;height:22px;border-radius:5px;overflow:hidden;border:1px solid var(--border);background:var(--surface-2)}
+.fstack .bar div{display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:600;font-family:var(--font-mono);white-space:nowrap;overflow:hidden}
+.fstack .chips{display:flex;flex-wrap:wrap;gap:5px 16px;margin-top:6px;font-size:11px;color:var(--ink-2)}
+.fstack .chips b{color:var(--ink);font-weight:600}
+.badge-risk{font-size:10px;background:var(--crit);color:#fff;padding:2px 8px;border-radius:999px;font-weight:600;margin-left:2px;vertical-align:2px}
+.badge-stall{font-size:10px;background:var(--muted);color:#fff;padding:2px 8px;border-radius:999px;font-weight:600;margin-left:2px;vertical-align:2px}
+
+/* donut grid */
+.group-block{margin-bottom:24px}
+.group-block:last-child{margin-bottom:0}
+.group-head{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+.group-head .tag-big{font-size:13px;font-weight:600;color:var(--accent);background:color-mix(in srgb, var(--accent) 14%, transparent);padding:3px 11px;border-radius:6px;letter-spacing:.01em;font-family:var(--font-mono)}
+.group-head .gnote{font-size:12px;color:var(--muted)}
+.donut-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.donut-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 14px 14px;display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center}
+.donut{width:104px;height:104px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
+.donut-hole{width:66%;height:66%;border-radius:50%;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.donut-hole .dv{font-variant-numeric:tabular-nums;font-family:var(--font-mono);font-weight:600;font-size:12.5px;color:var(--ink)}
+.donut-hole .dl{font-size:8.5px;color:var(--muted);margin-top:1px}
+.dname{font-size:13px;font-weight:600;color:var(--ink);line-height:1.3}
+.dlegend{display:flex;flex-direction:column;gap:4px;font-size:11px;color:var(--ink-2);width:100%}
+.dlegend .drow{display:flex;align-items:center;gap:6px;justify-content:center}
+.dlegend i{width:8px;height:8px;border-radius:2px;flex:none}
+.dlegend b{color:var(--ink);font-weight:600}
+.donut-card.stall .donut{background:repeating-conic-gradient(var(--surface-2) 0 10deg, var(--border) 10deg 20deg)}
+
+/* bottleneck findings */
+.finding{display:flex;gap:16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:12px}
+.finding .fnum{font-size:17px;font-weight:600;color:var(--crit);flex:none;width:28px;line-height:1.2;font-family:var(--font-mono)}
+.finding h4{font-size:14px;font-weight:600;margin:0 0 5px;color:var(--ink)}
+.finding p{font-size:13px;color:var(--ink-2);line-height:1.65;margin:0}
+.finding p b{color:var(--ink)}
+
+.bnote{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:12px}
+.bnote.crit{border-left:3px solid var(--crit)}
+.bnote.good{border-left:3px solid var(--good)}
+.bnote-title{font-size:14px;font-weight:600;margin-bottom:10px;color:var(--ink)}
+.bnote ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:7px}
+.bnote li{font-size:13px;color:var(--ink-2);line-height:1.6}
+.bnote li b{color:var(--ink)}
+.bnote li .mono{font-variant-numeric:tabular-nums;font-family:var(--font-mono);font-weight:600;color:var(--ink)}
+.bnote .lead{font-size:13.5px;color:var(--ink-2);margin:0 0 10px;line-height:1.6}
+
+.ev-tbl{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+.ev-tbl th{background:var(--surface-2);font-weight:500;font-size:10.5px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-2);padding:7px 10px;text-align:left;font-family:var(--font-mono)}
+.ev-tbl td{padding:6px 10px;border-bottom:1px solid var(--border)}
+.ev-tbl td.num{text-align:right}
+.pill{font-size:10.5px;padding:2px 8px;border-radius:999px;font-weight:600}
+.pill.flat{background:color-mix(in srgb, var(--crit) 18%, transparent);color:var(--crit)}
+.pill.var{background:color-mix(in srgb, var(--good) 18%, transparent);color:var(--good)}
+
+/* vendor blocks */
+.vblock{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.vblock .vbar{width:3px;flex:none}
+.vblock .vmain{padding:18px 22px;flex:1;display:flex;flex-direction:column;gap:14px;min-width:0}
+.vhead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.vhead h3{font-size:15px;font-weight:600;margin-top:3px}
+.vhead h3 small{font-size:12px;color:var(--muted);font-weight:400;font-family:var(--font-sans)}
+.vtotal{text-align:right}
+.vtotal .n{font-size:17px;font-weight:600;font-family:var(--font-mono)}
+.vtotal .l{font-size:11px;color:var(--muted)}
+.vbody-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:24px}
+.finfo{display:flex;flex-direction:column;gap:10px;min-width:0}
+.ftable-head{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:500;margin-bottom:6px;font-family:var(--font-mono)}
+table.mini{width:100%;border-collapse:collapse;font-size:12.5px}
+table.mini td{padding:5px 0;border-bottom:1px dashed var(--border)}
+table.mini td:first-child{color:var(--ink-2)}
+table.mini td:last-child{text-align:right;font-weight:600;font-family:var(--font-mono)}
+table.mini tr:last-child td{border-bottom:none}
+table.mini tr.subtotal td{border-top:1.5px solid var(--border);border-bottom:none;font-weight:600;padding-top:8px;color:var(--ink)}
+@media (max-width:700px){
+  .vbody-grid{grid-template-columns:1fr}
+}
+
+/* matrix table */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:12.5px;min-width:760px}
+th,td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}
+th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:var(--surface)}
+thead th{background:var(--surface-2);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-2);font-family:var(--font-mono)}
+tbody tr:last-child td{border-bottom:none}
+tr.total td{font-weight:600;background:var(--surface-2)}
+td.zero{color:var(--muted)}
+.vendor-th{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.vendor-th .dot{width:8px;height:8px;border-radius:50%}
+
+/* cost callout */
+.callout{background:var(--surface-2);border:1px solid var(--border);border-left:3px solid var(--warn);border-radius:6px;padding:14px 18px;font-size:13px;line-height:1.65;color:var(--ink-2)}
+.callout b{color:var(--ink)}
+.callout .title{color:var(--warn);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px;display:block;font-family:var(--font-mono)}
+
+.minitbl{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.minitbl div{background:var(--surface);padding:10px 12px}
+.minitbl .f{font-size:11px;color:var(--muted)}
+.minitbl .p{font-size:14px;font-weight:600;margin-top:2px;font-family:var(--font-mono)}
+
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);line-height:1.7}
+footer b{color:var(--ink-2)}
+
+@media (max-width:560px){
+  .sharebar div span{display:none}
+}
+/* quick nav (matches Labeling Capa Board's side-nav) */
+.side-nav{position:fixed; left:18px; top:88px; display:flex; flex-direction:column; gap:2px; z-index:90; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:6px; box-shadow:0 6px 16px rgba(15,21,26,0.1); max-height:calc(100vh - 110px); overflow-y:auto;}
+.side-nav button, .side-nav a{font:inherit; font-size:11px; font-weight:500; color:var(--ink-2); background:none; border:none; border-radius:6px; padding:7px 10px; cursor:pointer; text-align:left; white-space:nowrap; text-decoration:none; display:block;}
+.side-nav button:hover, .side-nav a:hover{background:var(--surface-2); color:var(--ink);}
+.side-nav button.active{background:color-mix(in srgb, var(--accent) 14%, transparent); color:var(--accent); font-weight:600;}
+.side-nav .side-nav-divider{height:1px; background:var(--border); margin:4px 6px;}
+.side-nav a.side-nav-external{color:var(--accent); font-size:10.5px;}
+@media (max-width:1180px){ .side-nav{display:none;} }
+
+.status-pill{font-size:11px;padding:3px 10px;border-radius:999px;font-weight:600;white-space:nowrap;display:inline-block}
+.status-pill.good{background:color-mix(in srgb, var(--good) 18%, transparent);color:var(--good)}
+.status-pill.warn{background:color-mix(in srgb, var(--warn) 18%, transparent);color:var(--warn)}
+.status-pill.crit{background:color-mix(in srgb, var(--crit) 18%, transparent);color:var(--crit)}
+.status-pill.muted{background:var(--surface-2);color:var(--muted)}
+
+.pickcards{display:flex;flex-direction:column;gap:14px}
+.pickcard{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px 22px;display:flex;flex-direction:column;gap:10px}
+.pickcard .prank{font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.04em;font-family:var(--font-mono)}
+.pickcard h3{font-size:15px;font-weight:600;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pickcard .pcgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:6px}
+.pickcard .pcol{font-size:14px;line-height:1.6;color:var(--ink-2)}
+.pickcard .pcol > b{display:inline-block;font-size:12px;text-transform:uppercase;letter-spacing:.05em;font-weight:600;margin-bottom:6px;font-family:var(--font-mono)}
+.pickcard .pcol > b.pos{color:var(--good)}
+.pickcard .pcol > b.neg{color:var(--crit)}
+.pickcard .pcol ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:7px}
+.pickcard .pcol li{font-size:13.5px}
+.pickcard .pcol li b{color:var(--ink)}
+.pickcard .pcfoot{font-size:13px;color:var(--ink-2);margin:6px 0 0;line-height:1.6;padding-top:12px;border-top:1px dashed var(--border)}
+@media (max-width:640px){.pickcard .pcgrid{grid-template-columns:1fr}}
+
+/* feature candidate blocks */
+.fcand-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.fcand-block{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px 20px}
+.fcand-block h3{font-size:14px;font-weight:600;margin-bottom:2px}
+.fcand-block .fnote{font-size:12px;color:var(--muted);margin-bottom:10px}
+.fcand-item{padding:11px 0;border-top:1px dashed var(--border)}
+.fcand-item:first-of-type{border-top:none;padding-top:4px}
+.fcand-item .fname{font-weight:600;font-size:13.5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--ink)}
+.fcand-item .fdesc{font-size:12.5px;color:var(--ink-2);margin-top:4px;line-height:1.55}
+.fcand-item .fprice{font-size:11px;color:var(--accent);font-variant-numeric:tabular-nums;font-family:var(--font-mono);margin-top:4px;font-weight:600}
+.page-divider{margin-top:48px;padding-top:24px;border-top:2px dashed var(--border)}
+</style>
+
+<nav class="side-nav" id="sideNav" aria-label="빠른 이동">
+  <button type="button" data-target="secShare">처리량 비중</button>
+  <button type="button" data-target="vendor-detail-section">업체별 상세</button>
+  <button type="button" data-target="secDonuts">Feature 점유율</button>
+  <button type="button" data-target="secBottleneck">병목 진단</button>
+  <button type="button" data-target="secMatrix">처리량 매트릭스</button>
+  <button type="button" data-target="secCost">비용</button>
+  <div class="side-nav-divider"></div>
+  <button type="button" data-target="secCandidates">기타 업체 후보</button>
+  <button type="button" data-target="secPick">후보 우선순위</button>
+  <button type="button" data-target="secFcand">Feature별 후보군</button>
+  <button type="button" data-target="secPriceCompare">가격 비교</button>
+  <button type="button" data-target="secHistory">전체 이력</button>
+  <div class="side-nav-divider"></div>
+  <a class="side-nav-external" href="./index.html">Labeling Capa Board →</a>
+</nav>
+
+<div class="wrap page" id="page-current">
+
+  <header class="top">
+    <div>
+      <div class="eyebrow">Subcontractor Report</div>
+      <h1>라벨링 협력업체 현황 <span class="status-pill muted">예시 템플릿</span></h1>
+    </div>
+    <div class="asof">기준월 2026-09 · v3 업데이트 · 원본 재검증 완료 · 팀·프로젝트·feature·업체명·고객사명은 모두 예시입니다</div>
+  </header>
+  <div class="stats">
+    <div class="stat"><div class="k">협력업체</div><div class="v">5<span class="u">곳</span></div></div>
+    <div class="stat"><div class="k">월 총 처리량</div><div class="v">139<span class="u">만 frame/set</span></div></div>
+    <div class="stat"><div class="k">담당 feature 라인</div><div class="v">15<span class="u">개</span></div></div>
+    <div class="stat"><div class="k">최대 비중 업체</div><div class="v" style="color:var(--v-lts)">L vendor<span class="u">39%</span></div></div>
+  </div>
+
+  <section id="secShare">
+    <div class="sec-head"><h2>업체별 처리량 비중</h2><span class="sub">2026-09 · 전체 1,392,830 frame/set</span></div>
+    <div class="sharebar">
+      <div style="width:39.0%;background:var(--v-lts)"><span>L vendor 39%</span></div>
+      <div style="width:29.0%;background:var(--v-nexter)"><span>N vendor 29%</span></div>
+      <div style="width:19.6%;background:var(--v-crowd)"><span>C vendor 20%</span></div>
+      <div style="width:12.3%;background:var(--v-alchera)"><span>A vendor 12%</span></div>
+      <div style="width:0.1%;background:var(--v-ns)"></div>
+    </div>
+    <div class="legend">
+      <div class="item"><span class="dot" style="background:var(--v-lts)"></span><b>L vendor</b>&nbsp;543,500 (39.0%)</div>
+      <div class="item"><span class="dot" style="background:var(--v-nexter)"></span><b>N vendor</b>&nbsp;404,450 (29.0%)</div>
+      <div class="item"><span class="dot" style="background:var(--v-crowd)"></span><b>C vendor</b>&nbsp;272,880 (19.6%)</div>
+      <div class="item"><span class="dot" style="background:var(--v-alchera)"></span><b>A vendor</b>&nbsp;172,000 (12.3%)</div>
+      <div class="item"><span class="dot" style="background:var(--v-ns)"></span><b>N2 vendor</b>&nbsp;0 (0.0%) · 온보딩 단계</div>
+    </div>
+  </section>
+
+  <section id="vendor-detail-section">
+    <div class="sec-head"><h2>업체별 담당 Feature · 처리량</h2><span class="sub">2026-09 · 업체 → feature 순 정리</span></div>
+
+    <div class="vblock"><div class="vbar" style="background:var(--v-lts)"></div>
+      <div class="vmain">
+        <div class="vhead">
+          <div>
+            <div class="role">39.0% · feature 11종</div>
+            <h3>L vendor Group <small>(L vendor GDS)</small></h3>
+            <div class="site">🔗 <a href="https://example-vendor-a.example" target="_blank">example-vendor-a.example</a></div>
+          </div>
+          <div class="vtotal"><div class="n num">543,500</div><div class="l">frame/set · 9월</div></div>
+        </div>
+        <div class="vbody-grid">
+          <div class="finfo">
+            <p class="desc">2016년 QA(품질보증) 스핀오프로 설립된 BPO/데이터 아웃소싱 그룹. 본사 베트남 하노이, 도쿄·서울·미국(버지니아) 지사 보유. 60개 이상 국제 고객사 보유 주장.</p>
+            <div class="tags"><span class="tag">자동차/ADAS</span><span class="tag">금융(BFSI)</span><span class="tag">건설</span><span class="tag">이커머스</span><span class="tag">헬스케어</span></div>
+            <div class="row"><span>주요 고객(공개)</span><b>고객사 A·고객사 B·고객사 C·고객사 D·고객사 E</b></div>
+            <div class="row"><span>제공 서비스</span><b>2D/3D 박스, 차선, 카메라+LiDAR 포인트클라우드, LLM 데이터</b></div>
+          </div>
+          <div class="ftable-wrap">
+            <div class="ftable-head">Feature별 9월 처리량 (frame/set)</div>
+            <table class="mini">
+              <tr><td>MV Fxx (10FPS)</td><td class="num">200,000</td></tr>
+              <tr><td>2D FV Oxx</td><td class="num">66,000</td></tr>
+              <tr><td>3D FV Oxx</td><td class="num">50,000</td></tr>
+              <tr><td>MV Fxx (PRK)</td><td class="num">44,000</td></tr>
+              <tr><td>MV Fxx (DRV)</td><td class="num">42,000</td></tr>
+              <tr><td>2D FV Lane</td><td class="num">39,000</td></tr>
+              <tr><td>2D FV Lxx2/Rxx</td><td class="num">32,200</td></tr>
+              <tr><td>MV Oxx (DRV)</td><td class="num">28,500</td></tr>
+              <tr><td>MV Oxx (PRK)</td><td class="num">22,800</td></tr>
+              <tr><td>SV Oxx (4ch)</td><td class="num">19,000</td></tr>
+              <tr><td>3D FV Lxx2</td><td class="num zero">0</td></tr>
+              <tr class="subtotal"><td>소계</td><td class="num">543,500</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vblock"><div class="vbar" style="background:var(--v-nexter)"></div>
+      <div class="vmain">
+        <div class="vhead">
+          <div>
+            <div class="role">29.0% · feature 11종 (최다 담당)</div>
+            <h3>N vendor <small>(Nexter AI)</small></h3>
+            <div class="site">🔗 <a href="https://example-vendor-b.example" target="_blank">example-vendor-b.example</a></div>
+          </div>
+          <div class="vtotal"><div class="n num">404,450</div><div class="l">frame/set · 9월</div></div>
+        </div>
+        <div class="vbody-grid">
+          <div class="finfo">
+            <p class="desc">서울 마포구 소재, 자율주행 어노테이션 단일 전문 업체. 고객사 명단은 비공개(NDA 기반 완성차/Tier-1/인지 솔루션사 추정). 원본 시트의 "NS" 약어를 담당자 A 확인을 거쳐 정정했습니다(자세한 내용은 하단 각주 참고).</p>
+            <div class="tags"><span class="tag">자율주행/ADAS 전용</span></div>
+            <div class="row"><span>주요 고객(공개)</span><b>비공개 (공개 자료 없음)</b></div>
+            <div class="row"><span>제공 서비스</span><b>3D LiDAR, Oxx/Sxx, 차선(Lxx2&RB), Txxxx, Txx, Fxx</b></div>
+          </div>
+          <div class="ftable-wrap">
+            <div class="ftable-head">Feature별 9월 처리량 (frame/set)</div>
+            <table class="mini">
+              <tr><td>FV Txx</td><td class="num">87,000</td></tr>
+              <tr><td>2D FV Oxx</td><td class="num">79,500</td></tr>
+              <tr><td>3D FV Oxx</td><td class="num">48,000</td></tr>
+              <tr><td>FV Txx2</td><td class="num">43,500</td></tr>
+              <tr><td>FV Lxx</td><td class="num">33,600</td></tr>
+              <tr><td>2D FV Lxx2/Rxx</td><td class="num">32,200</td></tr>
+              <tr><td>2D FV Lane</td><td class="num">30,200</td></tr>
+              <tr><td>MV Lxxx <span style="color:var(--muted);font-size:10.5px">(구 "NS")</span></td><td class="num">25,700</td></tr>
+              <tr><td>MV Oxx (DRV)</td><td class="num">9,710</td></tr>
+              <tr><td>SV Oxx (4ch)</td><td class="num">8,870</td></tr>
+              <tr><td>MV Oxx (PRK)</td><td class="num">6,170</td></tr>
+              <tr class="subtotal"><td>소계</td><td class="num">404,450</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vblock"><div class="vbar" style="background:var(--v-crowd)"></div>
+      <div class="vmain">
+        <div class="vhead">
+          <div>
+            <div class="role">19.6% · feature 7종 · KOSDAQ 000000</div>
+            <h3>C vendor <small>(크라우드웍스)</small></h3>
+            <div class="site">🔗 <a href="https://example-vendor-c.example" target="_blank">example-vendor-c.example</a></div>
+          </div>
+          <div class="vtotal"><div class="n num">272,880</div><div class="l">frame/set · 9월</div></div>
+        </div>
+        <div class="vbody-grid">
+          <div class="finfo">
+            <p class="desc">2017년 설립(네이버 투자), 2023년 8월 AI 학습데이터 기업 최초 코스닥 상장. 등록 작업자 약 60만 명, 누적 고객사 356곳. 26년 1분기 매출 28.5억원(+49.9% YoY).</p>
+            <div class="tags"><span class="tag">금융</span><span class="tag">모빌리티/로보틱스</span><span class="tag">제조</span><span class="tag">공공/국방</span><span class="tag">헬스케어</span></div>
+            <div class="row"><span>주요 고객(공개)</span><b>고객사 D·고객사 H·고객사 I·고객사 J, 과기부 AI Hub 사업</b></div>
+            <div class="row"><span>제공 서비스</span><b>이미지/영상/텍스트 라벨링, LLM 구축, Physical AI 데이터</b></div>
+          </div>
+          <div class="ftable-wrap">
+            <div class="ftable-head">Feature별 9월 처리량 (frame/set)</div>
+            <table class="mini">
+              <tr><td>FV Txx</td><td class="num">110,000</td></tr>
+              <tr><td>2D FV Oxx</td><td class="num">50,600</td></tr>
+              <tr><td>FV Txx2</td><td class="num">44,000</td></tr>
+              <tr><td>3D FV Oxx</td><td class="num">36,600</td></tr>
+              <tr><td>SV Oxx (4ch)</td><td class="num">11,440</td></tr>
+              <tr><td>MV Oxx (DRV)</td><td class="num">10,780</td></tr>
+              <tr><td>MV Oxx (PRK)</td><td class="num">9,460</td></tr>
+              <tr class="subtotal"><td>소계</td><td class="num">272,880</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vblock"><div class="vbar" style="background:var(--v-alchera)"></div>
+      <div class="vmain">
+        <div class="vhead">
+          <div>
+            <div class="role">12.3% · feature 4종 · KOSDAQ 000001</div>
+            <h3>A vendor <small>(알체라)</small></h3>
+            <div class="site">🔗 <a href="https://example-vendor-d.example" target="_blank">example-vendor-d.example</a></div>
+          </div>
+          <div class="vtotal"><div class="n num">172,000</div><div class="l">frame/set · 9월</div></div>
+        </div>
+        <div class="vbody-grid">
+          <div class="finfo">
+            <p class="desc">2016년 설립(삼성SAIT 출신), 성남 분당 본사. 원래는 얼굴인식·이상탐지 AI 비전 기업이나, 라벨링 사업부가 별도 성장 중 — 자율주행 데이터 누적매출 약 114억원.</p>
+            <div class="tags"><span class="tag">자율주행 데이터</span><span class="tag">금융/핀테크*</span><span class="tag">공공/공항*</span><span class="tag">스마트팩토리</span></div>
+            <div class="row"><span>주요 고객(공개)</span><b>*비전AI 본업 기준: 고객사 K·고객사 L·고객사 M·고객사 N·고객사 O</b></div>
+            <div class="row"><span>제공 서비스</span><b>이미지/영상/음성/텍스트 라벨링(3단계 교차검증 QA)</b></div>
+          </div>
+          <div class="ftable-wrap">
+            <div class="ftable-head">Feature별 9월 처리량 (frame/set)</div>
+            <table class="mini">
+              <tr><td>MV Fxx (10FPS)</td><td class="num">95,000</td></tr>
+              <tr><td>MV Lxxx</td><td class="num">43,700</td></tr>
+              <tr><td>MV Fxx (PRK)</td><td class="num">24,600</td></tr>
+              <tr><td>MV Fxx (DRV)</td><td class="num">8,700</td></tr>
+              <tr class="subtotal"><td>소계</td><td class="num">172,000</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vblock unresolved"><div class="vbar" style="background:var(--v-ns)"></div>
+      <div class="vmain">
+        <div class="vhead">
+          <div>
+            <div class="role">0.0% · 온보딩 단계</div>
+            <h3>N2 vendor</h3>
+            <div class="site">🔗 <a href="https://example-vendor-e.example" target="_blank">example-vendor-e.example</a></div>
+          </div>
+          <div class="vtotal"><div class="n num">0</div><div class="l">frame/set · 9월</div></div>
+        </div>
+        <div class="vbody-grid">
+          <div class="finfo">
+            <p class="desc">2011년 설립, 글로벌 AI 학습데이터 기업(본사 싱가포르, 중국 거점 운영). 멀티센서 수집+가공+GT 라벨링 원스톱 솔루션 제공. 공식 5번째 업체로 확인됐으나 9월 물량 배정이 없어 <b style="color:var(--ink)">신규 온보딩 단계</b>로 추정됩니다.</p>
+            <div class="tags"><span class="tag">자율주행 데이터</span><span class="tag">리테일</span><span class="tag">금융</span><span class="tag">하이테크</span></div>
+            <div class="row"><span>주요 고객(공개)</span><b>공개된 개별 고객사명 없음 (OEM/Tier-1 대상 사업 소개만 확인)</b></div>
+            <div class="row"><span>제공 서비스</span><b>2D/3D 박스, 세그멘테이션, LiDAR 포인트클라우드, 4D-BEV</b></div>
+          </div>
+          <div class="ftable-wrap">
+            <div class="ftable-head">Feature별 9월 처리량 (frame/set)</div>
+            <table class="mini">
+              <tr><td style="color:var(--muted)">9월 배정 feature 없음</td><td class="num zero">–</td></tr>
+              <tr class="subtotal"><td>소계</td><td class="num">0</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="secDonuts">
+    <div class="sec-head"><h2>Feature별 업체 점유율</h2><span class="sub">2026-09 · feature 자체 total 기준 %, 제품군별 정리</span></div>
+
+    <div class="group-block">
+      <div class="group-head"><span class="tag-big">2D</span><span class="gnote">3개 feature · 329,700 frame</span></div>
+      <div class="donut-grid">
+        <div class="donut-card">
+          <div class="donut" style="background:conic-gradient(var(--v-nexter) 0% 50%, var(--v-lts) 50% 100%)"><div class="donut-hole"><div class="dv">64,400</div><div class="dl">frame</div></div></div>
+          <div class="dname">2D FV Lxx2/Rxx</div>
+          <div class="dlegend"><div class="drow"><i style="background:var(--v-nexter)"></i><b>N vendor</b> 50.0%</div><div class="drow"><i style="background:var(--v-lts)"></i><b>L vendor</b> 50.0%</div></div>
+        </div>
+        <div class="donut-card">
+          <div class="donut" style="background:conic-gradient(var(--v-lts) 0% 56.4%, var(--v-nexter) 56.4% 100%)"><div class="donut-hole"><div class="dv">69,200</div><div class="dl">frame</div></div></div>
+          <div class="dname">2D FV Lane</div>
+          <div class="dlegend"><div class="drow"><i style="background:var(--v-lts)"></i><b>L vendor</b> 56.4%</div><div class="drow"><i style="background:var(--v-nexter)"></i><b>N vendor</b> 43.6%</div></div>
+        </div>
+        <div class="donut-card">
+          <div class="donut" style="background:conic-gradient(var(--v-nexter) 0% 40.5%, var(--v-lts) 40.5% 74.2%, var(--v-crowd) 74.2% 100%)"><div class="donut-hole"><div class="dv">196,100</div><div class="dl">frame</div></div></div>
+          <div class="dname">2D FV Oxx</div>
+          <div class="dlegend"><div class="drow"><i style="background:var(--v-nexter)"></i><b>N vendor</b> 40.5%</div><div class="drow"><i style="background:var(--v-lts)"></i><b>L vendor</b> 33.7%</div><div class="drow"><i style="background:var(--v-crowd)"></i><b>C vendor</b> 25.8%</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-block">
+      <div class="group-head"><span class="tag-big">3D</span><span class="gnote">2개 feature · 134,600 frame</span></div>
+      <div class="donut-grid">
+        <div class="donut-card">
+          <div class="donut" style="background:conic-gradient(var(--v-lts) 0% 37.2%, var(--v-nexter) 37.2% 72.9%, var(--v-crowd) 72.9% 100%)"><div class="donut-hole"><div class="dv">134,600</div><div class="dl">frame</div></div></div>
+          <div class="dname">3D FV Oxx</div>
+          <div class="dlegend"><div class="drow"><i style="background:var(--v-lts)"></i><b>L vendor</b> 37.2%</div><div class="drow"><i style="background:var(--v-nexter)"></i><b>N vendor</b> 35.7%</div><div class="drow"><i style="background:var(--v-crowd)"></i><b>C vendor</b> 27.2%</div></div>
+        </div>
+        <div class="donut-card stall">
+          <div class="donut"><div class="donut-hole"><div class="dv">0</div><div class="dl">가동중단</div></div></div>
+          <div class="dname">3D FV Lxx2 <span class="badge-stall">중단</span></div>
+          <div class="dlegend"><div class="drow">L vendor 배정 · 9월 실적 0</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-block">
+      <div class="group-head"><span class="tag-big">MV</span><span class="gnote">7개 feature · 610,730 frame</span></div>
+      <div class="donut-grid">
+        <div class="donut-card">
+          <div class="donut" style="background:conic-gradient(var(--v-lts) 0% 67.8%, var(--v-alchera) 67.8% 100%)"><div class="donut-hole"><div class="dv">295,000</div><div class="dl">frame</div></div></div>
+          <div class="dname">MV Fxx (10FPS)</div>
+          <div class="dlegend"><div class="drow"><i style="background:var(--v-lts)"></i><b>L vendor</b> 67.8%</div><div class="drow"><i style="background:var(--v-alchera)"></i><b>A vendor</b> 32.2%</div></div>
+        </div>
+        <div class="donut-card">
+          <div class="donut" style="background:conic-gradient(var(--v-lts) 0% 64.1%, var(--v-alchera) 64.1% 100%)"><div class="donut-hole"><div class="dv">68,600</div><div class="dl">frame</div></div></div>
+          <div class="dname">MV Fxx (PRK)</div>
+          <div class="dlegend"><div class="drow"><i style="background:var(--v-lts)"></i><b>L vendor</b> 64.1%</div><div class="drow"><i style="background:var(--v-alchera)"></i><b>A vendor</b> 35.9%</div></div>
+        </div>
+        <div class="donut-card">
+          <div class="donut" style="background:conic-gradient(var(--v-lts) 0% 82.8%, var(--v-alchera) 82.8% 100%)"><div class="donut-hole"><div class="dv">50,700</div><div class="dl">frame</div></div></div>
+          <div class="dname">MV Fxx (DRV)</div>
+          <div class="dlegend"><div class="drow"><i style="background:var(--v-lts)"></i><b>L vendor</b> 82.8%</div><div class="drow"><i style="background:var(--v-alchera)"></i><b>A vendor</b> 17.2%</div></div>
+        </div>
+        <div class="donut-card">
+          <div class="donut" style="background:conic-gradient(var(--v-alchera) 0% 63.0%, var(--v-nexter) 63.0% 100%)"><div class="donut-hole"><div class="dv">69,400</div><div class="dl">frame</div></div></div>
+          <div class="dname">MV Lxxx</div>
+          <div class="dlegend"><div class="drow"><i style="background:var(--v-alchera)"></i><b>A vendor</b> 63.0%</div><div class="drow"><i style="background:var(--v-nexter)"></i><b>N vendor</b> 37.0%</div></div>
+        </div>
+        <div class="donut-card">
+          <div class="donut" style="background:conic-gradient(var(--v-lts) 0% 58.2%, var(--v-crowd) 58.2% 80.2%, var(--v-nexter) 80.2% 100%)"><div class="donut-hole"><div class="dv">48,990</div><div class="dl">frame</div></div></div>
+          <div class="dname">MV Oxx (DRV)</div>
+          <div class="dlegend"><div class="drow"><i style="background:var(--v-lts)"></i><b>L vendor</b> 58.2%</div><div class="drow"><i style="background:var(--v-crowd)"></i><b>C vendor</b> 22.0%</div><div class="drow"><i style="background:var(--v-nexter)"></i><b>N vendor</b> 19.8%</div></div>
+        </div>
+        <div class="donut-card">
+          <div class="donut" style="background:conic-gradient(var(--v-lts) 0% 59.3%, var(--v-crowd) 59.3% 83.9%, var(--v-nexter) 83.9% 100%)"><div class="donut-hole"><div class="dv">38,430</div><div class="dl">frame</div></div></div>
+          <div class="dname">MV Oxx (PRK)</div>
+          <div class="dlegend"><div class="drow"><i style="background:var(--v-lts)"></i><b>L vendor</b> 59.3%</div><div class="drow"><i style="background:var(--v-crowd)"></i><b>C vendor</b> 24.6%</div><div class="drow"><i style="background:var(--v-nexter)"></i><b>N vendor</b> 16.1%</div></div>
+        </div>
+        <div class="donut-card">
+          <div class="donut" style="background:conic-gradient(var(--v-lts) 0% 48.3%, var(--v-crowd) 48.3% 77.4%, var(--v-nexter) 77.4% 100%)"><div class="donut-hole"><div class="dv">39,310</div><div class="dl">frame</div></div></div>
+          <div class="dname">SV Oxx (4ch)</div>
+          <div class="dlegend"><div class="drow"><i style="background:var(--v-lts)"></i><b>L vendor</b> 48.3%</div><div class="drow"><i style="background:var(--v-crowd)"></i><b>C vendor</b> 29.1%</div><div class="drow"><i style="background:var(--v-nexter)"></i><b>N vendor</b> 22.6%</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-block">
+      <div class="group-head"><span class="tag-big">FV</span><span class="gnote">3개 feature · 318,100 frame</span></div>
+      <div class="donut-grid">
+        <div class="donut-card">
+          <div class="donut" style="background:conic-gradient(var(--v-crowd) 0% 55.8%, var(--v-nexter) 55.8% 100%)"><div class="donut-hole"><div class="dv">197,000</div><div class="dl">frame</div></div></div>
+          <div class="dname">FV Txx</div>
+          <div class="dlegend"><div class="drow"><i style="background:var(--v-crowd)"></i><b>C vendor</b> 55.8%</div><div class="drow"><i style="background:var(--v-nexter)"></i><b>N vendor</b> 44.2%</div></div>
+        </div>
+        <div class="donut-card">
+          <div class="donut" style="background:conic-gradient(var(--v-crowd) 0% 50.3%, var(--v-nexter) 50.3% 100%)"><div class="donut-hole"><div class="dv">87,500</div><div class="dl">frame</div></div></div>
+          <div class="dname">FV Txx2</div>
+          <div class="dlegend"><div class="drow"><i style="background:var(--v-crowd)"></i><b>C vendor</b> 50.3%</div><div class="drow"><i style="background:var(--v-nexter)"></i><b>N vendor</b> 49.7%</div></div>
+        </div>
+        <div class="donut-card">
+          <div class="donut" style="background:conic-gradient(var(--v-nexter) 0% 100%)"><div class="donut-hole"><div class="dv">33,600</div><div class="dl">frame</div></div></div>
+          <div class="dname">FV Lxx <span class="badge-risk">단일 100%</span></div>
+          <div class="dlegend"><div class="drow"><i style="background:var(--v-nexter)"></i><b>N vendor</b> 100% — 백업 없음</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="secBottleneck">
+    <div class="sec-head"><h2>병목 진단</h2><span class="sub">일별 처리 패턴 기반 추정 · Labeling_capacity.xlsx 일자별 셀 분석</span></div>
+
+    <p class="lead">요청하신 대로 <b style="color:var(--ink)">Oxx 라인</b>을 중심으로 봤습니다 — 9월 일자별 처리량이 근무일 내내 <b style="color:var(--ink)">완전히 똑같은 숫자</b>면 "고정"(=여유 없이 꽉 참), 날짜마다 오르내리면 "변동"(=여력 있음)으로 판단했습니다.</p>
+
+    <div class="bnote crit">
+      <div class="bnote-title">🔴 Oxx가 병목 — L vendor·C vendor가 5개 Oxx 라인 전부(또는 대부분) 꽉 찼습니다</div>
+      <ul>
+        <li>Oxx 관련 feature는 <b>2D FV Oxx · 3D FV Oxx · MV Oxx(DRV) · MV Oxx(PRK) · SV Oxx(4ch)</b> 5개, 합쳐서 월 <span class="mono">457,430</span>장</li>
+        <li><b>L vendor는 이 5개 전부</b> 근무일마다 정확히 같은 수량 반복 (2D FV Oxx 3,000/일, 3D FV Oxx 2,000/일, MV Oxx DRV 1,500/일, MV Oxx PRK 1,200/일, SV Oxx 1,000/일 — 하루도 안 빠짐)</li>
+        <li><b>C vendor도 5개 중 4개</b> 같은 패턴(3D FV Oxx만 변동)</li>
+        <li>이 둘이 Oxx 전체 물량의 <span class="mono">66.7%</span>(305,180장)를 차지 — <b>Oxx 밀린 물량을 두 업체가 더 받아줄 여력이 구조적으로 없음</b></li>
+        <li>N vendor는 Oxx에서도 날짜별로 물량이 변하긴 하지만(1,500~3,000장/일 등) Oxx 내 비중이 33.3%뿐이라 전체를 못 받쳐줌</li>
+      </ul>
+    </div>
+
+    <div class="bnote good">
+      <div class="bnote-title">🟢 반대로 여유 있어 보이는 곳</div>
+      <ul>
+        <li><b>A vendor</b> 담당 4개 feature(Fxx DRV·PRK·10FPS, Lxxx) 전부 날짜별 변동폭이 커서 — Oxx가 아니라 아쉽지만, 다른 라인 증량 여지는 있어 보임</li>
+        <li><b>N2 vendor</b> — 계약된 5번째 업체인데 9월 물량이 <span class="mono">0</span>. 완전 유휴 상태라 <b>Oxx 신규 온보딩 1순위 후보</b></li>
+        <li><b>3D FV Lxx2</b> — L vendor 배정인데 9월 실적 0. Oxx는 아니지만, 같은 L vendor가 Oxx 라인은 꽉 채우면서 이 라인만 비어있다는 점은 확인해볼 가치 있음</li>
+      </ul>
+    </div>
+
+    <div class="bnote">
+      <div class="bnote-title">💡 그래서</div>
+      <ul>
+        <li>Oxx 증설은 "기존 업체에 더 맡기기"로는 안 풀림 — <b>L vendor·C vendor와 쿼터 재협상</b>이나 <b>N2 vendor 등 새 업체를 Oxx에 투입</b>하는 방향이 현실적</li>
+        <li>단, "고정 수량"이 계약상 상한인지 단순 관행인지는 이 파일만으론 확정 못 함 — 업체별 PM 확인 필요</li>
+      </ul>
+    </div>
+
+    <div class="tbl-wrap" style="margin-top:16px">
+      <table class="ev-tbl">
+        <thead><tr><th>Oxx Feature</th><th>L vendor</th><th>C vendor</th><th>N vendor</th></tr></thead>
+        <tbody>
+          <tr><td>2D FV Oxx</td><td><span class="pill flat">고정 3,000/일</span></td><td><span class="pill flat">고정 2,300/일</span></td><td><span class="pill var">변동 1,500~3,000</span></td></tr>
+          <tr><td>3D FV Oxx</td><td><span class="pill flat">고정 2,000/일</span></td><td><span class="pill var">변동 750~1,300</span></td><td><span class="pill var">변동 700~1,500</span></td></tr>
+          <tr><td>MV Oxx (DRV)</td><td><span class="pill flat">고정 1,500/일</span></td><td><span class="pill flat">고정 490/일</span></td><td><span class="pill var">변동 180~400</span></td></tr>
+          <tr><td>MV Oxx (PRK)</td><td><span class="pill flat">고정 1,200/일</span></td><td><span class="pill flat">고정 430/일</span></td><td><span class="pill var">변동 120~250</span></td></tr>
+          <tr><td>SV Oxx (4ch)</td><td><span class="pill flat">고정 1,000/일</span></td><td><span class="pill flat">고정 520/일</span></td><td><span class="pill var">변동 180~350</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="secMatrix">
+    <div class="sec-head"><h2>Feature × 업체 월 처리량</h2><span class="sub">2026-09 · 단위 frame/set (전체 기준)</span></div>
+    <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th><div class="vendor-th"><span class="dot" style="background:var(--v-lts)"></span>L vendor</div></th>
+          <th><div class="vendor-th"><span class="dot" style="background:var(--v-nexter)"></span>N vendor</div></th>
+          <th><div class="vendor-th"><span class="dot" style="background:var(--v-crowd)"></span>C vendor</div></th>
+          <th><div class="vendor-th"><span class="dot" style="background:var(--v-alchera)"></span>A vendor</div></th>
+          <th><div class="vendor-th"><span class="dot" style="background:var(--v-ns)"></span>N2 vendor</div></th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>2D FV Lxx2/Rxx</td><td class="num">32,200</td><td class="num">32,200</td><td class="num zero">–</td><td class="num zero">–</td><td class="num zero">–</td><td class="num">64,400</td></tr>
+        <tr><td>2D FV Lane</td><td class="num">39,000</td><td class="num">30,200</td><td class="num zero">–</td><td class="num zero">–</td><td class="num zero">–</td><td class="num">69,200</td></tr>
+        <tr><td>3D FV Lxx2</td><td class="num">0</td><td class="num zero">–</td><td class="num zero">–</td><td class="num zero">–</td><td class="num zero">–</td><td class="num zero">0</td></tr>
+        <tr><td>MV Fxx (DRV)</td><td class="num">42,000</td><td class="num zero">–</td><td class="num zero">–</td><td class="num">8,700</td><td class="num zero">–</td><td class="num">50,700</td></tr>
+        <tr><td>MV Fxx (PRK)</td><td class="num">44,000</td><td class="num zero">–</td><td class="num zero">–</td><td class="num">24,600</td><td class="num zero">–</td><td class="num">68,600</td></tr>
+        <tr><td>MV Fxx (10FPS)</td><td class="num">200,000</td><td class="num zero">–</td><td class="num zero">–</td><td class="num">95,000</td><td class="num zero">–</td><td class="num">295,000</td></tr>
+        <tr><td>MV Lxxx</td><td class="num zero">–</td><td class="num">25,700</td><td class="num zero">–</td><td class="num">43,700</td><td class="num zero">–</td><td class="num">69,400</td></tr>
+        <tr><td>2D FV Oxx</td><td class="num">66,000</td><td class="num">79,500</td><td class="num">50,600</td><td class="num zero">–</td><td class="num zero">–</td><td class="num">196,100</td></tr>
+        <tr><td>3D FV Oxx</td><td class="num">50,000</td><td class="num">48,000</td><td class="num">36,600</td><td class="num zero">–</td><td class="num zero">–</td><td class="num">134,600</td></tr>
+        <tr><td>MV Oxx (DRV)</td><td class="num">28,500</td><td class="num">9,710</td><td class="num">10,780</td><td class="num zero">–</td><td class="num zero">–</td><td class="num">48,990</td></tr>
+        <tr><td>MV Oxx (PRK)</td><td class="num">22,800</td><td class="num">6,170</td><td class="num">9,460</td><td class="num zero">–</td><td class="num zero">–</td><td class="num">38,430</td></tr>
+        <tr><td>SV Oxx (4ch)</td><td class="num">19,000</td><td class="num">8,870</td><td class="num">11,440</td><td class="num zero">–</td><td class="num zero">–</td><td class="num">39,310</td></tr>
+        <tr><td>FV Txx</td><td class="num zero">–</td><td class="num">87,000</td><td class="num">110,000</td><td class="num zero">–</td><td class="num zero">–</td><td class="num">197,000</td></tr>
+        <tr><td>FV Txx2</td><td class="num zero">–</td><td class="num">43,500</td><td class="num">44,000</td><td class="num zero">–</td><td class="num zero">–</td><td class="num">87,500</td></tr>
+        <tr><td>FV Lxx</td><td class="num zero">–</td><td class="num">33,600</td><td class="num zero">–</td><td class="num zero">–</td><td class="num zero">–</td><td class="num">33,600</td></tr>
+        <tr class="total"><td>Total</td><td class="num">543,500</td><td class="num">404,450</td><td class="num">272,880</td><td class="num">172,000</td><td class="num zero">0</td><td class="num">1,392,830</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:8px">※ 2D FV TSD는 9월 중 신규 램프업 단계로 월간 total 값이 아직 설정되지 않아(일일 목표치만 존재) 표에서 제외했습니다. MV Lxxx의 "N vendor" 값은 원본 시트에 "NS" 약어로 기재된 값을 병합한 것입니다.</p>
+  </section>
+
+  <section id="secCost">
+    <div class="sec-head"><h2>비용</h2><span class="sub">업체별 단가 데이터 미확보</span></div>
+    <div class="callout">
+      <span class="title">⚠ 업체별 비용 분해는 확인하지 못했습니다</span>
+      <b>Labeling_capacity.xlsx</b>의 비용 시트(Sheet1)는 비어 있었고, <b>Cost_management/annual_cost_management.xlsx</b>에는 <b>feature 단위(전 업체 합산) 월별 아웃소싱 비용</b>만 존재해 업체별 단가·지출액을 분리할 수 없었습니다. 참고로 2024년 연간 기준 아웃소싱 비용은 예산 72억원 중 약 <b>54.6억원(76%)</b> 집행되었고, feature별 blended 단가(전 업체 평균)는 아래와 같습니다.
+    </div>
+    <div class="minitbl">
+      <div><div class="f">3D Oxx</div><div class="p num">₩2,201<span style="font-size:11px;color:var(--muted)">/frame</span></div></div>
+      <div><div class="f">2D Lxx2/Rxx</div><div class="p num">₩1,703<span style="font-size:11px;color:var(--muted)">/frame</span></div></div>
+      <div><div class="f">2D Lxxx2</div><div class="p num">₩134<span style="font-size:11px;color:var(--muted)">/frame</span></div></div>
+      <div><div class="f">2D Txx</div><div class="p num">₩166<span style="font-size:11px;color:var(--muted)">/frame</span></div></div>
+      <div><div class="f">3D Lxxx</div><div class="p num">₩585<span style="font-size:11px;color:var(--muted)">/set</span></div></div>
+    </div>
+    <p style="font-size:12.5px;color:var(--ink-2);margin-top:14px;line-height:1.6">
+      업체별 실제 계약 단가·월 청구액을 확인하려면 <span class="num" style="background:var(--surface-2);padding:1px 5px;border-radius:4px">Cost_management/Subcontractor</span> 하위의 업체별 정산 파일, 또는 <span class="num" style="background:var(--surface-2);padding:1px 5px;border-radius:4px">Subcontractor_management/[vendor명]</span> 폴더의 계약서·인보이스를 열어봐야 합니다 (이번 조사에서는 폴더 목록만 확인, 개별 파일은 열지 않았습니다).
+    </p>
+  </section>
+
+  <footer>
+    <p><b>데이터 출처</b> — 처리량/feature 매핑: SharePoint <span class="num">TeamShare/.../Schedule Planning/Labeling_capacity.xlsx</span> (2026-09 시트, "전체" 월간 합계 기준) + <a href="https://example.com/internal-chat-thread" target="_blank">Slack #외주업체 관리 스레드</a>(담당자 A, 2026-09-14 — 공식 업체명 5곳 확인 및 업체별 feature 매핑 이미지). 업체 프로필: 각 사 공식 홈페이지, 뉴스, 공시자료(웹 검색, 2026-09 기준) — 공개 자료 특성상 <b>StradVision과의 실제 계약 관계를 업체 측이 직접 명시한 사례는 없으며</b>, 일반 사업 소개 자료를 바탕으로 정리했습니다.</p>
+    <p><b>이번에 반영한 정정 사항</b> — 캐파시티 시트의 MV Lxxx 행에 "NS"로만 기재돼 있던 벤더를 <b>N vendor</b>로 특정(Slack 확인 매핑표 대조, 39,000선 이상 타 feature와의 코드 패턴 일치로 교차검증). 5번째 공식 업체 <b>N2 vendor</b>를 신규 반영했으며, 9월 처리량 시트에는 아직 배정 물량이 없어 온보딩 단계로 표기했습니다.</p>
+    <p><b>한계</b> — 업체별 비용(단가/월 청구액)은 검토한 두 파일(Labeling_capacity.xlsx Sheet1, 24y_data_annotation_cost_management.xlsx) 어디에도 벤더 단위로 존재하지 않아 feature 단위 blended 단가로 대체 표기했습니다.</p>
+    <p><b>재검증</b> — 이전 버전 공개 후 수치 정확성 문의가 있어, 원본 파일을 다시 받아 셀 서식(줄바꿈 포함 라벨) 때문에 생겼던 행 오프셋 문제를 고치는 방식으로 처음부터 재추출했습니다. 그 결과 <b>업체별·feature별 합계 수치는 기존 리포트와 100% 일치</b>했고(재추출본과 대조 완료), 병목 진단에 쓰인 일자별 데이터는 이번에 새로 정확하게 뽑았습니다.</p>
+    <p><b>다음 단계</b> — 같은 Slack 스레드에서 담당자 B이 요청한 "기존 검토 50개 업체 리스트/평가자료"와 담당자 A이 공유한 <a href="https://example.com/internal-wiki-page+Screening+Test" target="_blank">Confluence · Outsourcing Screening Test</a> 페이지(연도별 스크리닝 이력)를 바탕으로, 과거 컨택했으나 채택하지 않은 업체(T vendor·INFINIX·Selectstar·D5 vendor 등 언급됨) 정리는 별도 업데이트로 이어갈 예정입니다.</p>
+  </footer>
+
+</div>
+
+<div class="wrap page page-divider" id="secCandidates">
+
+  <header class="top">
+    <div>
+      <div class="eyebrow">Data Annotation Team · Vendor Sourcing</div>
+      <h1>기타 업체 후보 — Oxx 증설용</h1>
+    </div>
+    <div class="asof">2024~2026 스크리닝 이력 종합 · 업체명·고객사명은 모두 예시입니다</div>
+  </header>
+  <p class="lede">현재 5개 협업 업체(위쪽 참고)만으로는 <b style="color:var(--ink)">Oxx 라인 증설이 막혀 있는 상태</b>라, 과거에 스크리닝 테스트를 진행했던 업체들을 다시 살펴봤습니다. Confluence <b style="color:var(--ink)">"Outsourcing Screening Test"</b>(2024Y~2026Y, 분기별 테스트 기록)와 Slack 업체 후보 리스트를 근거로, 총 <b style="color:var(--ink)">25개 업체</b>의 과거 테스트 결과·장단점·드랍 사유를 정리했습니다.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="k">검토한 업체</div><div class="v">25<span class="u">곳</span></div></div>
+    <div class="stat"><div class="k">Oxx 재검토 추천</div><div class="v" style="color:var(--good)">4<span class="u">곳</span></div></div>
+    <div class="stat"><div class="k">조건부/보류</div><div class="v" style="color:var(--warn)">2<span class="u">곳</span></div></div>
+    <div class="stat"><div class="k">반복 Fail(비추천)</div><div class="v" style="color:var(--crit)">7<span class="u">곳</span></div></div>
+  </div>
+
+  <section id="secPick">
+    <div class="sec-head"><h2>Oxx 증설 우선순위 후보</h2><span class="sub">과거 테스트 결과 기준 Top 4</span></div>
+    <div class="pickcards">
+
+      <div class="pickcard">
+        <div class="prank">1순위 · 이미 접촉 중</div>
+        <h3>N2 vendor (ND) <span class="status-pill warn">조건부 · 통과보류</span></h3>
+        <div class="pcgrid">
+          <div class="pcol">
+            <b class="pos">장점</b>
+            <ul>
+              <li>2026.06 MV2 Oxx 스크리닝 <b>품질 1위</b>(Oxx·Sxx·Lxx2 전부 K vendor보다 우수)</li>
+              <li>이미 5번째 공식 업체로 계약 진행 중 — 별도 온보딩 없이 바로 증량 가능</li>
+              <li>Oxx Static 단가는 시장평균보다 <b>61% 저렴</b>(56원 vs 144원)</li>
+            </ul>
+          </div>
+          <div class="pcol">
+            <b class="neg">단점</b>
+            <ul>
+              <li>제출 단가가 자체 참고단가(16원/m)의 <b>3.2배</b>(51원/m)로 괴리 큼</li>
+              <li>스크리닝 중 워크플로우 미준수로 작업범위 축소(전체→50프레임)</li>
+              <li>잦은 문의로 소통비용 높음, Rxx2는 "작업 의지 없음" 평가</li>
+            </ul>
+          </div>
+        </div>
+        <p class="pcfoot">단기계약(7/15~9/14, 즉 <b style="color:var(--crit)">오늘 종료</b>) 조건으로 진행 중 — 단가 재협의 결과에 따라 연장 여부 결정 임박. <b>지금 바로 의사결정이 필요한 후보입니다.</b></p>
+      </div>
+
+      <div class="pickcard">
+        <div class="prank">2순위 · 재스크리닝 추천</div>
+        <h3>I vendor <span class="status-pill good">2024 조건부 Pass</span></h3>
+        <div class="pcgrid">
+          <div class="pcol">
+            <b class="pos">장점</b>
+            <ul>
+              <li><b>고객사 F·고객사 G와 3년간 3D annotation</b> 프로젝트 수행 — 실제 완성차 레퍼런스 보유(Slack 확인)</li>
+              <li>국내 30명 + 베트남 50명 이상 즉시투입 가능</li>
+              <li>월 10k+ 물량 소화 가능하다고 밝힘</li>
+            </ul>
+          </div>
+          <div class="pcol">
+            <b class="neg">단점</b>
+            <ul>
+              <li>2024.03 3D 테스트 "Not good quality Pass" — 통과했으나 최상급 품질은 아님</li>
+              <li>이후 <b>2.5년간 재테스트 기록 없음</b> — 현재 실력 재확인 필요</li>
+              <li>가격 정보 없음(견적 미확보)</li>
+            </ul>
+          </div>
+        </div>
+        <p class="pcfoot">Oxx 관련 레퍼런스가 확실한 유일한 미가동 후보 — <b>Oxx 전용으로 재스크리닝 1순위 제안.</b></p>
+      </div>
+
+      <div class="pickcard">
+        <div class="prank">3순위 · 최근 탈락, 재도전 여지</div>
+        <h3>K vendor (KA) <span class="status-pill crit">2026.06 탈락</span></h3>
+        <div class="pcgrid">
+          <div class="pcol">
+            <b class="pos">장점</b>
+            <ul>
+              <li>2025.02 3D Oxx 테스트에선 <b>Pass 1</b> 받은 이력 있음</li>
+              <li>Lxx2 Create 단가가 시장평균보다 <b>73% 저렴</b>(40원 vs 147원)</li>
+              <li>항목별로는 경쟁력 있는 가격대도 존재</li>
+            </ul>
+          </div>
+          <div class="pcol">
+            <b class="neg">단점</b>
+            <ul>
+              <li>2026.06 Oxx 재테스트 <b>Fit 정밀도(Yaw/Pitch/Roll/Size) 부족</b>으로 탈락</li>
+              <li>현재 단가 월 10,384,000원 — 시장평균(8,281,000원)보다 <b>25% 높음</b></li>
+              <li>Sxx Static 단가 2,000원 — 시장평균의 <b>15배</b></li>
+            </ul>
+          </div>
+        </div>
+        <p class="pcfoot">Oxx Dynamic·Sxx Static·Lxx2 Point 3개 항목만 시장평균으로 조정해도 <b>연 3,800만원 절감</b> 가능 — 가격은 협상 여지 있으나, <b>품질(Oxx Fit) 재훈련 없이는 재투입 어려움.</b></p>
+      </div>
+
+      <div class="pickcard">
+        <div class="prank">4순위 · 자진철회, 재접촉 가능</div>
+        <h3>S vendor <span class="status-pill good">품질 Fail 이력 없음</span></h3>
+        <div class="pcgrid">
+          <div class="pcol">
+            <b class="pos">장점</b>
+            <ul>
+              <li>2024년 2차례 테스트 모두 <b>일정 문제로 자진철회</b>(품질 문제 아님)</li>
+              <li>실제로 "떨어진" 적이 없는 유일한 후보</li>
+              <li>Slack: "정교한 가이드라인 설계, 레드팀 검증" 강점으로 평가</li>
+            </ul>
+          </div>
+          <div class="pcol">
+            <b class="neg">단점</b>
+            <ul>
+              <li>실전 품질 데이터가 아예 없어 <b>검증 자체가 안 된 상태</b></li>
+              <li>2024.06 Lxxx 테스트도 참여 의사만 밝히고 후속 기록 없음</li>
+              <li>가격 정보 없음(견적 미확보)</li>
+            </ul>
+          </div>
+        </div>
+        <p class="pcfoot">일정만 맞으면 테스트를 끝까지 완주한 적이 없다는 게 오히려 기회 — <b>Oxx 전용 테스트 일정을 명확히 잡고 재접촉</b>해볼 가치 있음.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="secFcand">
+    <div class="sec-head"><h2>Feature별 후보군 — Oxx · Sxx · Lxx2</h2><span class="sub">말씀하신 3개 feature 기준 재정리</span></div>
+
+    <div class="fcand-grid">
+
+      <div class="fcand-block">
+        <h3>Oxx <span style="font-size:12px;color:var(--muted);font-weight:500">3D Object Detection</span></h3>
+        <div class="fnote">8개 업체 테스트 이력</div>
+
+        <div class="fcand-item">
+          <div class="fname">N2 vendor <span class="status-pill warn">조건부</span></div>
+          <div class="fdesc">2026.06 품질 1위. Dynamic 56원, Static 56원</div>
+          <div class="fprice">시장대비 Dynamic +22% · Static -61%</div>
+        </div>
+        <div class="fcand-item">
+          <div class="fname">K vendor <span class="status-pill crit">비추천</span></div>
+          <div class="fdesc">2026.06 Fit 정밀도 부족으로 탈락. Dynamic 140원, Static 155원</div>
+          <div class="fprice">시장대비 Dynamic +204% · Static +8%</div>
+        </div>
+        <div class="fcand-item">
+          <div class="fname">I vendor <span class="status-pill good">재검토</span></div>
+          <div class="fdesc">2024.03 "품질 낮으나 Pass". 고객사 G·고객사 F 3년 실적</div>
+          <div class="fprice">가격정보 없음</div>
+        </div>
+        <div class="fcand-item">
+          <div class="fname">M vendor <span class="status-pill warn">혼재</span></div>
+          <div class="fdesc">2024.03 Pass(size·heading 양호, 큰 객체 너비 오류)</div>
+          <div class="fprice">가격정보 없음</div>
+        </div>
+        <div class="fcand-item">
+          <div class="fname">A3 vendor <span class="status-pill warn">혼재</span></div>
+          <div class="fdesc">2025 Pending — 판정 보류</div>
+          <div class="fprice">가격정보 없음</div>
+        </div>
+        <div class="fcand-item">
+          <div class="fname">D vendor <span class="status-pill crit">비추천</span></div>
+          <div class="fdesc">2024·2025 3회 반복 Fail(lidar point 임의처리, class오류)</div>
+          <div class="fprice">가격정보 없음</div>
+        </div>
+        <div class="fcand-item">
+          <div class="fname">K2 vendor <span class="status-pill warn">혼재</span></div>
+          <div class="fdesc">2024.03 Pass(품질 낮음), 베트남 80명 가용</div>
+          <div class="fprice">가격정보 없음</div>
+        </div>
+        <div class="fcand-item">
+          <div class="fname">B vendor·T2 vendor·S2 vendor·L2 vendor·M2 vendor <span class="status-pill crit">비추천</span></div>
+          <div class="fdesc">2024.03 베트남 BPO 일괄테스트 — 전부 Fail</div>
+          <div class="fprice">가격정보 없음</div>
+        </div>
+      </div>
+
+      <div class="fcand-block">
+        <h3>Sxx <span style="font-size:12px;color:var(--muted);font-weight:500">Static Object Detection</span></h3>
+        <div class="fnote">4개 업체 테스트 이력</div>
+
+        <div class="fcand-item">
+          <div class="fname">N2 vendor <span class="status-pill warn">조건부</span></div>
+          <div class="fdesc">Dynamic 48원, Static 80원 — 시장평균 대비 준수한 수준</div>
+          <div class="fprice">시장대비 Dynamic +2% · Static -42%</div>
+        </div>
+        <div class="fcand-item">
+          <div class="fname">K vendor <span class="status-pill crit">비추천</span></div>
+          <div class="fdesc">Dynamic 140원, Static <b style="color:var(--crit)">2,000원</b> — occluded 속성 처리 비용으로 추정</div>
+          <div class="fprice">시장대비 Dynamic +198% · Static +1,360%(15배)</div>
+        </div>
+        <div class="fcand-item">
+          <div class="fname">T vendor <span class="status-pill warn">혼재</span></div>
+          <div class="fdesc">2024.03 Pass(ground plane·최소픽셀 이슈, 개선 가능성 언급됨)</div>
+          <div class="fprice">가격정보 없음</div>
+        </div>
+        <div class="fcand-item">
+          <div class="fname">M vendor <span class="status-pill warn">혼재</span></div>
+          <div class="fdesc">2024.03 Pass(heading·ground plane 오류, 교육으로 개선 예상)</div>
+          <div class="fprice">가격정보 없음</div>
+        </div>
+        <div class="fcand-item">
+          <div class="fname">베트남 BPO 일괄(B vendor 등) <span class="status-pill crit">비추천</span></div>
+          <div class="fdesc">2024.03 전부 Fail(class오류, 작업누락 다수)</div>
+          <div class="fprice">가격정보 없음</div>
+        </div>
+      </div>
+
+      <div class="fcand-block">
+        <h3>Lxx2 / Rxx <span style="font-size:12px;color:var(--muted);font-weight:500">차선 · 도로경계</span></h3>
+        <div class="fnote">가격 구조가 업체마다 정반대라 주의 필요</div>
+
+        <div class="fcand-item">
+          <div class="fname">N2 vendor <span class="status-pill warn">조건부·가격주의</span></div>
+          <div class="fdesc">Create 매우 비쌈(Line 1,159원·RB 1,718원), Point는 저렴(12원). 실작업은 Point 비중이 압도적이라 m당 환산 43.7~54.7원 — 참고단가(16원)의 3.2배</div>
+          <div class="fprice">시장대비 Create +688%~+1,069%</div>
+        </div>
+        <div class="fcand-item">
+          <div class="fname">K vendor <span class="status-pill warn">혼재·가격주의</span></div>
+          <div class="fdesc">N2 vendor와 반대 구조 — Create 저렴(40원), Point 비쌈(80원)</div>
+          <div class="fprice">시장대비 Create -73% · Point +48%</div>
+        </div>
+        <div class="fcand-item">
+          <div class="fname">A2 vendor·A3 vendor·I2 vendor <span class="status-pill muted">기록 부족</span></div>
+          <div class="fdesc">2024.07 3D Lxx2/Rxx 테스트 참여("메일 제출"만 기록, 결과 상세 없음)</div>
+          <div class="fprice">가격정보 없음</div>
+        </div>
+        <div class="fcand-item">
+          <div class="fname">A vendor <span class="status-pill muted">미제출</span></div>
+          <div class="fdesc">2024.07 Lxx2/Rxx 테스트 미제출(현재는 타 feature로 활동 중인 파트너)</div>
+          <div class="fprice">—</div>
+        </div>
+        <div class="fcand-item">
+          <div class="fname">S vendor·B2 vendor <span class="status-pill muted">자진철회</span></div>
+          <div class="fdesc">2024.03 LDRBD 테스트 기간 내 처리 어려워 자진철회(품질 이슈 아님)</div>
+          <div class="fprice">가격정보 없음</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="secPriceCompare">
+    <div class="sec-head"><h2>가격 비교 — N2 vendor vs K vendor vs 시장평균</h2><span class="sub">2026.06.18 MV2 스크리닝 견적 기준</span></div>
+    <div class="tbl-wrap">
+      <table class="ev-tbl">
+        <thead><tr><th>Feature</th><th>Task</th><th>N2 vendor</th><th>ND 시장대비</th><th>K vendor</th><th>KA 시장대비</th><th>시장평균</th></tr></thead>
+        <tbody>
+          <tr><td>Oxx</td><td>Dynamic</td><td class="num">56원</td><td class="num">+22%</td><td class="num">140원</td><td class="num" style="color:var(--crit)">+204%</td><td class="num">46원</td></tr>
+          <tr><td>Oxx</td><td>Static</td><td class="num">56원</td><td class="num" style="color:var(--good)">-61%</td><td class="num">155원</td><td class="num">+8%</td><td class="num">144원</td></tr>
+          <tr><td>Sxx</td><td>Dynamic</td><td class="num">48원</td><td class="num">+2%</td><td class="num">140원</td><td class="num" style="color:var(--crit)">+198%</td><td class="num">47원</td></tr>
+          <tr><td>Sxx</td><td>Static</td><td class="num">80원</td><td class="num" style="color:var(--good)">-42%</td><td class="num">2,000원</td><td class="num" style="color:var(--crit)">+1,360%</td><td class="num">137원</td></tr>
+          <tr><td>Txxxx</td><td>—</td><td class="num">80원</td><td class="num" style="color:var(--good)">-53%</td><td class="num">160원</td><td class="num">-6%</td><td class="num">170원</td></tr>
+          <tr><td>Rxx2</td><td>Polygon</td><td class="num">719원</td><td class="num" style="color:var(--crit)">+146%</td><td class="num">320원</td><td class="num">+10%</td><td class="num">292원</td></tr>
+          <tr><td>Lxx2 Line</td><td>Create</td><td class="num" style="color:var(--crit)">1,159원</td><td class="num" style="color:var(--crit)">+688%</td><td class="num">40원</td><td class="num" style="color:var(--good)">-73%</td><td class="num">147원</td></tr>
+          <tr><td>Lxx2 Line</td><td>Point</td><td class="num">12원</td><td class="num" style="color:var(--good)">-78%</td><td class="num">80원</td><td class="num">+48%</td><td class="num">54원</td></tr>
+          <tr><td>Lxx2 RB</td><td>Create</td><td class="num" style="color:var(--crit)">1,718원</td><td class="num" style="color:var(--crit)">+1,069%</td><td class="num">40원</td><td class="num" style="color:var(--good)">-73%</td><td class="num">147원</td></tr>
+          <tr class="total"><td>월 합계</td><td>—</td><td class="num">14,662,000원</td><td class="num">+77%</td><td class="num">10,384,000원</td><td class="num">+25%</td><td class="num">8,281,000원</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:8px">※ 다른 21개 업체는 이 스크리닝 라운드에 참여하지 않아 견적 데이터가 없습니다. 위 표는 2026년 6월 MV2 프로젝트용으로 받은 견적이며, 실제 StradVision Oxx 증설 협상 시 재견적이 필요합니다.</p>
+  </section>
+
+  <section id="secHistory">
+    <div class="sec-head"><h2>전체 스크리닝 이력</h2><span class="sub">2024.02 ~ 2026.06 · Confluence 기준 · 25개 업체</span></div>
+    <div class="tbl-wrap">
+      <table class="ev-tbl">
+        <thead><tr><th>상태</th><th>업체명</th><th>테스트 feature</th><th>결과 요약</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr><td><span class="status-pill warn">조건부</span></td><td><b>N2 vendor</b></td><td>MV2 Oxx·Sxx·Lxx2</td><td>통과보류 — 품질 1위권, 단가 3.2배 괴리</td><td>현재 5번째 계약업체(단기계약 9/14 종료)</td></tr>
+          <tr><td><span class="status-pill crit">비추천</span></td><td><b>K vendor</b></td><td>MV2 Oxx·Sxx·Txxxx</td><td>2026.06 탈락 — Oxx Fit 부족, 단가 +25%</td><td>2025엔 Pass1 이력, 재훈련 여지</td></tr>
+          <tr><td><span class="status-pill good">재검토</span></td><td><b>I vendor</b></td><td>3D Oxx</td><td>2024.03 조건부 Pass(품질 낮음)</td><td>고객사 F·고객사 G 3D annotation 3년 경력</td></tr>
+          <tr><td><span class="status-pill good">재검토</span></td><td><b>S vendor</b></td><td>3D·LDRBD·Lxxx</td><td>자진철회×2(일정 문제, 품질 이슈 아님)</td><td>가이드라인 설계 강점(Slack)</td></tr>
+          <tr><td><span class="status-pill warn">혼재</span></td><td><b>M vendor</b></td><td>3D Oxx/Sxx, FFC Roadmark</td><td>2024 Pass → 2025 Pending(박스핏 오류)</td><td>베트남 K vendor와 협업 관계</td></tr>
+          <tr><td><span class="status-pill crit">비추천</span></td><td><b>T vendor</b></td><td>3D Oxx, Lxxx, FFC Roadmark</td><td>반복 Fail(Oxx bbox, Lxxx 탈락)</td><td>Sxx/Txxxx는 개선 가능성 언급, AI Hub 국책과제 경험(Slack)</td></tr>
+          <tr><td><span class="status-pill crit">비추천</span></td><td><b>D vendor</b></td><td>3D Oxx, Lxxx</td><td>3회 반복 Fail(2024×2, 2025×1)</td><td>2년간 개선 없음, class오류 반복</td></tr>
+          <tr><td><span class="status-pill warn">혼재</span></td><td><b>K2 vendor</b></td><td>3D</td><td>Pass(품질 낮음)</td><td>베트남 80명 가용, 한국어 PM 부재</td></tr>
+          <tr><td><span class="status-pill good">재검토</span></td><td><b>A2 vendor</b></td><td>FFC Roadmark, 3D Lxx2/Rxx, Fxx, Lxxx</td><td>Pass2(부분합격, class오류 일부)</td><td>여러 feature 꾸준히 지원한 중견 후보</td></tr>
+          <tr><td><span class="status-pill good">재검토</span></td><td><b>D2 vendor</b></td><td>Txx2</td><td>Pass</td><td>즉시 10명, 증원 유연</td></tr>
+          <tr><td><span class="status-pill good">재검토</span></td><td><b>I2 vendor</b></td><td>Lxxx2, 3D Lxx2/Rxx, 2D Txx2</td><td>Pass(견적검토 필요)</td><td></td></tr>
+          <tr><td><span class="status-pill warn">혼재</span></td><td><b>A3 vendor</b></td><td>3D Oxx, Lxxx2, Lxxx</td><td>Lxxx Pass(중국인력) / Oxx Pending / Lxxx2 Fail</td><td>feature별 편차 큼</td></tr>
+          <tr><td><span class="status-pill crit">비추천</span></td><td><b>T2 vendor</b></td><td>3D</td><td>Fail</td><td>즉시투입 40명 보유하나 품질 미달</td></tr>
+          <tr><td><span class="status-pill crit">비추천</span></td><td><b>B vendor</b></td><td>3D, Fxx</td><td>Fail(Oxx/Sxx/Txxxx 전부)</td><td></td></tr>
+          <tr><td><span class="status-pill crit">비추천</span></td><td><b>M2 vendor</b></td><td>3D</td><td>Fail(미완료, 평가불가)</td><td>이후 연락 두절</td></tr>
+          <tr><td><span class="status-pill crit">비추천</span></td><td><b>S2 vendor</b></td><td>3D</td><td>Fail(중복작업 등 심각한 오류)</td><td></td></tr>
+          <tr><td><span class="status-pill crit">비추천</span></td><td><b>L2 vendor</b></td><td>3D</td><td>Fail("교육 불가" 판정)</td><td></td></tr>
+          <tr><td><span class="status-pill muted">자진철회</span></td><td><b>B2 vendor</b></td><td>LDRBD</td><td>자진철회(타사 프로젝트 참여)</td><td></td></tr>
+          <tr><td><span class="status-pill muted">미완료</span></td><td><b>S3 vendor</b></td><td>Lxxx</td><td>후속 기록 없음</td><td>한국어 PM 부재, 번역 가능</td></tr>
+          <tr><td><span class="status-pill muted">미완료</span></td><td><b>Q vendor</b></td><td>Lxxx</td><td>후속 기록 없음</td><td></td></tr>
+          <tr><td><span class="status-pill crit">비추천</span></td><td><b>S4 vendor</b></td><td>Lxxx</td><td>Fail(기간 내 미제출)</td><td></td></tr>
+          <tr><td><span class="status-pill crit">비추천</span></td><td><b>D3 vendor</b></td><td>Lxxx</td><td>Fail(기간 내 미제출)</td><td>중국인력 활용</td></tr>
+          <tr><td><span class="status-pill crit">비추천</span></td><td><b>D4 vendor</b></td><td>Lxxx</td><td>탈락</td><td>싱가포르인력 활용</td></tr>
+          <tr><td><span class="status-pill muted">미완료</span></td><td><b>G vendor</b></td><td>Fxx</td><td>후속 기록 없음</td><td></td></tr>
+          <tr><td><span class="status-pill muted">미검증</span></td><td><b>D5 vendor</b></td><td>—</td><td>Confluence 테스트 이력 없음</td><td>Slack 추천 후보 — 전담 BPO 작업장 운영(보안 강점)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:8px">※ "재검토"는 품질 Fail 이력이 없거나 Pass 경험이 있는 곳, "혼재"는 feature별로 결과가 갈린 곳, "비추천"은 반복적/명확한 품질 Fail, "미완료"는 테스트 참여 의사를 밝혔으나 후속 기록이 확인되지 않는 곳입니다.</p>
+  </section>
+
+  <footer>
+    <p><b>데이터 출처</b> — Confluence <a href="https://example.com/internal-wiki-page+Screening+Test" target="_blank">Outsourcing Screening Test</a> 스페이스 산하 2024Y~2026Y 분기별 "Outsourcing Company Test Status" 페이지 전체, "250227 Oxx 스크리닝 테스트 모호했던 기준 업체별 정리사항", "[DBM] MV2 스크리닝테스트- KA, ND 업체의 단가 비교"(2026.06.18, 담당자 A) + <a href="https://example.com/internal-chat-thread" target="_blank">Slack #외주업체 관리 스레드</a>(담당자 B 업체 후보 설명).</p>
+    <p><b>한계</b> — 가격 정보는 2026년 6월 N2 vendor·K vendor 2개사 견적만 확보되어 있어, 나머지 23개 업체는 품질 이력만 있고 가격 비교가 불가능합니다. 상당수 업체(S3 vendor, Q vendor, G vendor 등)는 "다음 test 참여" 이후 Confluence상 후속 기록이 끊겨 있어 실제로 재테스트가 진행됐는지 확인이 안 됩니다. D5 vendor는 Slack 추천만 있고 실제 스크리닝 이력이 없어 별도 접촉이 필요합니다.</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var nav = document.getElementById("sideNav");
+  if(!nav) return;
+  nav.addEventListener("click", function(e){
+    var btn = e.target.closest("button[data-target]");
+    if(!btn) return;
+    var target = document.getElementById(btn.getAttribute("data-target"));
+    if(target && target.scrollIntoView) target.scrollIntoView({behavior:"smooth", block:"start"});
+  });
+  var navButtons = nav.querySelectorAll("button[data-target]");
+  var targets = Array.prototype.map.call(navButtons, function(b){ return document.getElementById(b.getAttribute("data-target")); }).filter(Boolean);
+  if(!("IntersectionObserver" in window) || !targets.length) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        var id = entry.target.id;
+        navButtons.forEach(function(b){ b.classList.toggle("active", b.getAttribute("data-target")===id); });
+      }
+    });
+  }, {rootMargin:"-40% 0px -50% 0px", threshold:0});
+  targets.forEach(function(t){ io.observe(t); });
+})();
+</script>
+
+</body></html>
