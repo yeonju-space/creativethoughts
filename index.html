@@ -372,7 +372,7 @@
     <p class="tmpl-note">※ 팀·프로젝트·feature·업체명은 모두 예시이며 실제 데이터가 아닙니다.</p>
   </header>
 
-  <div class="notice"><b>라벨링 특이사항:</b> 2D Oxx와 3D Oxx는 같은 인력을 공유합니다 — 한 달 최대치는 2D만 하면 100,000장, 3D만 하면 40,000장으로 가정(비율 1:2.5)하며, 2D를 50,000장 쓰면 3D 여유는 20,000장으로 자동으로 줄어듭니다.<br>실제 비율·최대치는 확인 후 교체해주세요.</div>
+  <div class="notice"><b>라벨링 특이사항:</b> 2D Pxx와 3D Pxx는 같은 인력을 공유합니다 — 한 달 최대치는 2D만 하면 100,000장, 3D만 하면 40,000장으로 가정(비율 1:2.5)하며, 2D를 50,000장 쓰면 3D 여유는 20,000장으로 자동으로 줄어듭니다.<br>실제 비율·최대치는 확인 후 교체해주세요.</div>
 
   <div class="svc" id="syncBar"></div>
 
@@ -479,7 +479,7 @@
     <h2>가정 &amp; 다음 단계</h2>
     <ul>
       <li><b>계산 방식:</b> 우선순위(또는 마감) 순서대로 요청을 쌓아 누적 수량을 feature별 <b>월간 capa</b>로 소진하며 완료 시점을 추정합니다. 이번 달은 오늘부터 남은 일수만큼만 capa를 비례 배분합니다.</li>
-      <li><b>2D·3D Oxx 연동:</b> 하나의 capa 풀(2D 환산 기준)을 두 variant가 나눠 쓰기 때문에, 2D Oxx 항목과 3D Oxx 항목이 <b>하나의 우선순위 큐</b>에서 함께 계산됩니다 — 두 카드 모두 같은 시뮬레이터를 엽니다.</li>
+      <li><b>2D·3D Pxx 연동:</b> 하나의 capa 풀(2D 환산 기준)을 두 variant가 나눠 쓰기 때문에, 2D Pxx 항목과 3D Pxx 항목이 <b>하나의 우선순위 큐</b>에서 함께 계산됩니다 — 두 카드 모두 같은 시뮬레이터를 엽니다.</li>
       <li><b>지정 우선순위 vs 마감 임박순:</b> 큐 테이블의 두 "예상완료" 열은 같은 capa를 두 가지 처리 순서로 소진했을 때의 결과 비교입니다.</li>
       <li><b>다음 단계:</b> 위 확인 필요 항목(2D/3D 비율, capa 실측치)을 Data Team 2·프로젝트 담당자와 확인하고, Data Team 1 3명이 함께 편집할 수 있도록 공유 저장을 추가할지 결정합니다. 지금은 브라우저 로컬 저장이라 이 기기·이 브라우저에서만 유지됩니다.</li>
     </ul>
@@ -533,26 +533,26 @@
   // ---- source: 프로젝트별_라벨링_우선순위_일정.xlsx ----
   var defaultData = {
     features: [
-      {id:"od", name:"Oxx", unit:"장", monthlyCapacity:{"2026-10":105600,"2026-11":99600,"2026-12":92800},
+      {id:"od", name:"Pxx", unit:"장", monthlyCapacity:{"2026-10":229000,"2026-11":216000,"2026-12":201100},
         variantFactor:{"2D":1, "3D":1/OD_3D_RATIO},
-        cards:[{key:"2D", label:"2D Oxx"}, {key:"3D", label:"3D Oxx"}]},
-      {id:"tsr", name:"Txx", unit:"장", monthlyCapacity:{"2026-10":40300,"2026-11":39200,"2026-12":37400}},
-      {id:"ld", name:"Lxx2", unit:"장", staticBadge:"2D", monthlyCapacity:{"2026-10":28700,"2026-11":29300,"2026-12":31600}},
-      {id:"lpsd", name:"Lxxx", unit:"장", monthlyCapacity:{"2026-10":28500,"2026-11":27500,"2026-12":29000}},
-      {id:"fsd", name:"Fxx", unit:"장", monthlyCapacity:{"2026-10":25700,"2026-11":27400,"2026-12":27900}}
+        cards:[{key:"2D", label:"2D Pxx"}, {key:"3D", label:"3D Pxx"}]},
+      {id:"tsr", name:"Uxx", unit:"장", monthlyCapacity:{"2026-10":174200,"2026-11":169300,"2026-12":161600}},
+      {id:"ld", name:"Mxx", unit:"장", staticBadge:"2D", monthlyCapacity:{"2026-10":86100,"2026-11":87900,"2026-12":94800}},
+      {id:"lpsd", name:"Mxxx", unit:"장", monthlyCapacity:{"2026-10":28500,"2026-11":27500,"2026-12":29000}},
+      {id:"fsd", name:"Gxx", unit:"장", monthlyCapacity:{"2026-10":43700,"2026-11":46600,"2026-12":47400}}
     ],
     requests: [
-      {id:"r_od_aaa1_07", featureId:"od", project:"A Company(Batch07)", qty:14200, deadline:"2026-10-15", priority:1, prio:"높음", variant:"2D"},
-      {id:"r_od_tac1_2",  featureId:"od", project:"T Company(2차)",     qty:14500, deadline:"2026-11-03", priority:2, prio:"높음", variant:"3D"},
-      {id:"r_od_ai3dp",   featureId:"od", project:"AI Company", qty:28300, deadline:"2026-11-05", priority:3, prio:"높음", variant:"3D"},
-      {id:"r_od_aaa1_08", featureId:"od", project:"A Company(Batch08)", qty:13700, deadline:"2026-11-15", priority:4, prio:"높음", variant:"2D"},
-      {id:"r_od_tac1_3",  featureId:"od", project:"T Company(3차)",     qty:26000, deadline:"2026-12-08", priority:5, prio:"높음", variant:"3D"},
-      {id:"r_od_aaa1_09", featureId:"od", project:"A Company(Batch09)", qty:15400, deadline:"2026-12-15", priority:6, prio:"높음", variant:"2D"},
-      {id:"r_od_aaa1_10", featureId:"od", project:"A Company(Batch10)", qty:5240,  deadline:"2026-12-15", priority:7, prio:"높음", variant:"2D"},
-      {id:"r_od_tac1_1",  featureId:"od", project:"T Company(1차)", qty:9750, deadline:"2026-10-06", priority:8, prio:"보통", variant:"3D"},
-      {id:"r_od_china_1", featureId:"od", project:"C Company(1차)", qty:27200, deadline:"2026-10-31", priority:9, prio:"-", variant:"2D"},
-      {id:"r_od_china_2", featureId:"od", project:"C Company(2차)", qty:24900, deadline:"2026-11-15", priority:10, prio:"-", variant:"2D"},
-      {id:"r_od_china_3", featureId:"od", project:"C Company(3차)", qty:25800, deadline:"2026-11-30", priority:11, prio:"-", variant:"2D"},
+      {id:"r_od_aaa1_07", featureId:"od", project:"A Company(Batch07)", qty:14200, deadline:"2026-10-15", priority:2, prio:"높음", variant:"2D"},
+      {id:"r_od_tac1_2",  featureId:"od", project:"T Company(2차)",     qty:14500, deadline:"2026-11-03", priority:4, prio:"높음", variant:"3D"},
+      {id:"r_od_ai3dp",   featureId:"od", project:"AI Company", qty:28300, deadline:"2026-11-05", priority:5, prio:"높음", variant:"3D"},
+      {id:"r_od_aaa1_08", featureId:"od", project:"A Company(Batch08)", qty:13700, deadline:"2026-11-15", priority:6, prio:"높음", variant:"2D"},
+      {id:"r_od_tac1_3",  featureId:"od", project:"T Company(3차)",     qty:26000, deadline:"2026-12-08", priority:9, prio:"높음", variant:"3D"},
+      {id:"r_od_aaa1_09", featureId:"od", project:"A Company(Batch09)", qty:15400, deadline:"2026-12-15", priority:10, prio:"높음", variant:"2D"},
+      {id:"r_od_aaa1_10", featureId:"od", project:"A Company(Batch10)", qty:5240,  deadline:"2026-12-15", priority:11, prio:"높음", variant:"2D"},
+      {id:"r_od_tac1_1",  featureId:"od", project:"T Company(1차)", qty:9750, deadline:"2026-10-06", priority:1, prio:"보통", variant:"3D"},
+      {id:"r_od_china_1", featureId:"od", project:"C Company(1차)", qty:27200, deadline:"2026-10-31", priority:3, prio:"-", variant:"2D"},
+      {id:"r_od_china_2", featureId:"od", project:"C Company(2차)", qty:24900, deadline:"2026-11-15", priority:7, prio:"-", variant:"2D"},
+      {id:"r_od_china_3", featureId:"od", project:"C Company(3차)", qty:25800, deadline:"2026-11-30", priority:8, prio:"-", variant:"2D"},
 
       {id:"r_ld_aaa1_07", featureId:"ld", project:"A Company(Batch07)", qty:13400, deadline:"2026-10-15", priority:1, prio:"높음"},
       {id:"r_ld_ai",      featureId:"ld", project:"AI Company", qty:29700, deadline:"2026-11-05", priority:2, prio:"높음"},
@@ -561,13 +561,13 @@
       {id:"r_ld_aaa1_10", featureId:"ld", project:"A Company(Batch10)", qty:5010,  deadline:"2026-12-15", priority:5, prio:"높음"},
       {id:"r_ld_china",   featureId:"ld", project:"C Company",     qty:160600, deadline:null,        priority:6, prio:"-"},
 
-      {id:"r_lpsd_tac1_2", featureId:"lpsd", project:"T Company(2차)", qty:30900, deadline:"2026-11-03", priority:1, prio:"높음"},
-      {id:"r_lpsd_tac1_3", featureId:"lpsd", project:"T Company(3차)", qty:47800, deadline:"2026-12-08", priority:2, prio:"높음"},
-      {id:"r_lpsd_tac1_1", featureId:"lpsd", project:"T Company(1차)", qty:55400, deadline:"2026-10-06", priority:3, prio:"보통"},
+      {id:"r_lpsd_tac1_2", featureId:"lpsd", project:"T Company(2차)", qty:30900, deadline:"2026-11-03", priority:2, prio:"높음"},
+      {id:"r_lpsd_tac1_3", featureId:"lpsd", project:"T Company(3차)", qty:47800, deadline:"2026-12-08", priority:3, prio:"높음"},
+      {id:"r_lpsd_tac1_1", featureId:"lpsd", project:"T Company(1차)", qty:55400, deadline:"2026-10-06", priority:1, prio:"보통"},
 
-      {id:"r_fsd_tac1_2", featureId:"fsd", project:"T Company(2차)", qty:28600, deadline:"2026-11-03", priority:1, prio:"높음"},
-      {id:"r_fsd_tac1_3", featureId:"fsd", project:"T Company(3차)", qty:30100, deadline:"2026-12-08", priority:2, prio:"높음"},
-      {id:"r_fsd_tac1_1", featureId:"fsd", project:"T Company(1차)", qty:11700, deadline:"2026-10-06", priority:3, prio:"보통"},
+      {id:"r_fsd_tac1_2", featureId:"fsd", project:"T Company(2차)", qty:28600, deadline:"2026-11-03", priority:2, prio:"높음"},
+      {id:"r_fsd_tac1_3", featureId:"fsd", project:"T Company(3차)", qty:30100, deadline:"2026-12-08", priority:3, prio:"높음"},
+      {id:"r_fsd_tac1_1", featureId:"fsd", project:"T Company(1차)", qty:11700, deadline:"2026-10-06", priority:1, prio:"보통"},
 
       {id:"r_tsr_apl2_1", featureId:"tsr", project:"P Company(1차)",         qty:116000, deadline:"2026-10-05", priority:1, prio:"높음"},
       {id:"r_tsr_ai",     featureId:"tsr", project:"AI Company", qty:30800,  deadline:"2026-11-05", priority:2, prio:"높음"},
@@ -816,8 +816,8 @@
 
       var capaEditAttr = desc.variant ? ' data-capa-edit-variant="'+desc.variant+'"' : '';
       var displayCapa = desc.variant==="3D" ? Math.round(poolCapa*OD_3D_RATIO) : poolCapa;
-      var capaNote = desc.variant==="3D" ? "3D 환산 · 2D Oxx와 인력 공유" : (f.variantFactor ? "2D 환산 · 3D와 공유" : "월별 변경 가능");
-      var capaEditTitle = desc.variant==="3D" ? "3D Oxx 월별 CAPA 수정" : (desc.variant ? "2D Oxx 월별 CAPA 수정" : "월별 CAPA 수정");
+      var capaNote = desc.variant==="3D" ? "3D 환산 · 2D Pxx와 인력 공유" : (f.variantFactor ? "2D 환산 · 3D와 공유" : "월별 변경 가능");
+      var capaEditTitle = desc.variant==="3D" ? "3D Pxx 월별 CAPA 수정" : (desc.variant ? "2D Pxx 월별 CAPA 수정" : "월별 CAPA 수정");
       var capaHtml =
         '<div class="cb-label"><span>'+MONTH_LABELS[activeMonth]+' CAPA · '+capaNote+'</span>'+
           '<button type="button" class="fc-capa-edit-btn" data-capa-edit-feature="'+f.id+'"'+capaEditAttr+' data-capa-edit-month="'+activeMonth+'" title="'+capaEditTitle+'">✎ 수정</button>'+
@@ -1263,8 +1263,8 @@
     var noteHtml = "";
     if(f.variantFactor){
       noteHtml = capaVariant==="3D"
-        ? '<p class="panel-sub" style="margin:2px 0 0;">2D Oxx와 같은 인력 풀을 공유합니다. 여기 입력한 3D 수량은 비율(1:2.5)로 2D 기준 풀 CAPA로 환산되어 저장됩니다.</p>'
-        : '<p class="panel-sub" style="margin:2px 0 0;">3D Oxx 여유분은 이 값(2D 기준)에서 비율(1:2.5)로 자동 계산됩니다.</p>';
+        ? '<p class="panel-sub" style="margin:2px 0 0;">2D Pxx와 같은 인력 풀을 공유합니다. 여기 입력한 3D 수량은 비율(1:2.5)로 2D 기준 풀 CAPA로 환산되어 저장됩니다.</p>'
+        : '<p class="panel-sub" style="margin:2px 0 0;">3D Pxx 여유분은 이 값(2D 기준)에서 비율(1:2.5)로 자동 계산됩니다.</p>';
     }
     return (
       '<div class="field-block"><label>Feature 선택</label><div class="pillgroup">'+featurePills+'</div></div>'+
@@ -1689,10 +1689,10 @@
   var DASH_CONTEXT =
     "당신은 'Labeling Capa Board'라는 라벨링 우선순위 대시보드 사용법을 안내하는 도우미입니다. " +
     "이 대시보드는 Data Team 1(데이터 프로젝트 매니저)이 라벨링 외주업체(Data Team 2)의 월간 capa와 여러 프로젝트(T Company, A Company, P Company, C Company, AI Company 등)의 라벨링 요구 수량·마감일을 비교해서 우선순위를 정리하는 도구입니다. 화면 구성은 다음과 같습니다. " +
-    "1) 상단 'Feature·Capa 현황' 카드: Feature(2D Oxx/3D Oxx/Txx/2D Lxx2/Lxxx/Fxx)마다 카드가 하나씩 있고, 카드의 월 pill을 누르면 그 달 기준으로 '요구 대비 capa' 게이지가 바뀝니다. 게이지는 그 달 마감인 요구 수량 합계를 그 달 capa로 나눈 비율이고, 70% 미만은 초록(여유), 70~100%는 주황(타이트), 100% 초과는 빨강(지연 위험)입니다. capa 숫자를 눌러 직접 수정할 수 있고, '마감 요구' 밑줄 글자를 누르면 그 달에 어떤 프로젝트가 얼마나 요구했는지 팝업으로 볼 수 있습니다. 카드의 상태 칩(여유/타이트/지연 위험/마감 미정)은 그 feature의 모든 요청을 지정 우선순위대로 처리했을 때 가장 나쁜 상태를 보여줍니다. " +
+    "1) 상단 'Feature·Capa 현황' 카드: Feature(2D Pxx/3D Pxx/Uxx/2D Mxx/Mxxx/Gxx)마다 카드가 하나씩 있고, 카드의 월 pill을 누르면 그 달 기준으로 '요구 대비 capa' 게이지가 바뀝니다. 게이지는 그 달 마감인 요구 수량 합계를 그 달 capa로 나눈 비율이고, 70% 미만은 초록(여유), 70~100%는 주황(타이트), 100% 초과는 빨강(지연 위험)입니다. capa 숫자를 눌러 직접 수정할 수 있고, '마감 요구' 밑줄 글자를 누르면 그 달에 어떤 프로젝트가 얼마나 요구했는지 팝업으로 볼 수 있습니다. 카드의 상태 칩(여유/타이트/지연 위험/마감 미정)은 그 feature의 모든 요청을 지정 우선순위대로 처리했을 때 가장 나쁜 상태를 보여줍니다. " +
     "2) 'Feature·프로젝트 요구 수량' 히트맵: Feature(행) × 프로젝트 배치(열)로 요구 수량을 색 진하기로 보여주고, 배치는 마감 임박 순으로 정렬됩니다. 각 열 맨 위 '시기' 행에는 10월·11월·12월 눈금이 있는 작은 막대와 그 위에 점(마커)이 있는데, 점의 가로 위치가 그 배치의 마감일이 10~12월 중 언제쯤인지를 나타냅니다(막대에 마우스를 올리면 정확한 날짜가 나옵니다). 그 아래 굵은 숫자는 그 배치의 전체 feature 요구 수량 합계입니다. 맨 위 '+ 요청 추가/편집' 버튼을 누르면 프로젝트별로 묶인 배치 목록이 뜨고, 배치를 클릭하면 그 배치의 마감일·우선순위 등급·Feature별 요구 수량을 한 화면에서 모두 수정하거나 삭제할 수 있습니다. " +
     "3) 'Project·Batch 현황': 프로젝트마다 어떤 feature를 언제까지 얼마나 요구하는지 마감 임박 순으로 표를 보여줍니다. " +
-    "4) '우선순위 큐 시뮬레이터': 상단 pill로 feature를 골라서, 그 feature의 모든 요청을 '지정 우선순위'(Data Team 1이 정한 순서)로 처리했을 때와 '마감 임박순'(그냥 마감이 빠른 순서)으로 처리했을 때 각각 언제 끝날지 계산해서 두 열로 비교합니다. 완료 예상일이 마감일보다 늦으면 '지연 위험', 2주 미만 여유면 '타이트', 그 이상이면 '여유', 마감이 없으면 '마감 미정'입니다. ▲▼ 버튼으로 우선순위를 조정할 수 있습니다. 2D Oxx와 3D Oxx는 같은 라벨링 인력을 나눠 쓰기 때문에(한 달 최대치 2D 100,000장 또는 3D 40,000장, 비율 1:2.5) 두 카드가 실제로는 하나의 큐에서 함께 계산됩니다. " +
+    "4) '우선순위 큐 시뮬레이터': 상단 pill로 feature를 골라서, 그 feature의 모든 요청을 '지정 우선순위'(Data Team 1이 정한 순서)로 처리했을 때와 '마감 임박순'(그냥 마감이 빠른 순서)으로 처리했을 때 각각 언제 끝날지 계산해서 두 열로 비교합니다. 완료 예상일이 마감일보다 늦으면 '지연 위험', 2주 미만 여유면 '타이트', 그 이상이면 '여유', 마감이 없으면 '마감 미정'입니다. ▲▼ 버튼으로 우선순위를 조정할 수 있습니다. 2D Pxx와 3D Pxx는 같은 라벨링 인력을 나눠 쓰기 때문에(한 달 최대치 2D 100,000장 또는 3D 40,000장, 비율 1:2.5) 두 카드가 실제로는 하나의 큐에서 함께 계산됩니다. " +
     "5) '피드백 기록' 섹션과 이 도우미의 '피드백' 탭: 사용자가 도우미 창의 '📝 피드백' 탭에서 의견을 남기면 이름과 함께 페이지 하단 '피드백 기록' 섹션에 공개로 기록되고, Data Team 1이 확인 후 어떻게 반영했는지(처리 내역)를 같은 자리에 적어둡니다. 누가 무엇을 건의했고 어떻게 처리됐는지 그 섹션에서 그대로 볼 수 있습니다. " +
     "6) 화면 왼쪽의 세로 메뉴(현황/요구맵/프로젝트/우선순위/피드백/메모)를 누르면 해당 섹션으로 바로 스크롤됩니다. " +
     "7) 상단 'Data Team 2 캐파 동기화' 바: Data Team 2(라벨링팀)가 관리하는 SharePoint 원본 캐파 파일을 하루 두 번(낮 12시·저녁 6시) 자동으로 읽어와 Feature별 월간 capa 숫자에 반영합니다. '지금 동기화 요청' 버튼을 누르면 다음 점검 주기(약 15분 이내)에 우선 반영됩니다. " +
